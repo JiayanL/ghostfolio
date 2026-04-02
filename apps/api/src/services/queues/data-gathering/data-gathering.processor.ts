@@ -4,6 +4,7 @@ import { DataGatheringItem } from '@ghostfolio/api/services/interfaces/interface
 import { MarketDataService } from '@ghostfolio/api/services/market-data/market-data.service';
 import { SymbolProfileService } from '@ghostfolio/api/services/symbol-profile/symbol-profile.service';
 import {
+  DATA_GATHERING_DEAD_LETTER_QUEUE,
   DATA_GATHERING_QUEUE,
   DEFAULT_PROCESSOR_GATHER_ASSET_PROFILE_CONCURRENCY,
   DEFAULT_PROCESSOR_GATHER_HISTORICAL_MARKET_DATA_CONCURRENCY,
@@ -13,10 +14,10 @@ import {
 import { DATE_FORMAT, getStartOfUtcDate } from '@ghostfolio/common/helper';
 import { AssetProfileIdentifier } from '@ghostfolio/common/interfaces';
 
-import { Process, Processor } from '@nestjs/bull';
+import { InjectQueue, OnQueueFailed, Process, Processor } from '@nestjs/bull';
 import { Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
-import { Job } from 'bull';
+import { Job, Queue } from 'bull';
 import {
   addDays,
   format,
@@ -33,11 +34,32 @@ import { DataGatheringService } from './data-gathering.service';
 @Processor(DATA_GATHERING_QUEUE)
 export class DataGatheringProcessor {
   public constructor(
+    @InjectQueue(DATA_GATHERING_DEAD_LETTER_QUEUE)
+    private readonly deadLetterQueue: Queue,
     private readonly dataGatheringService: DataGatheringService,
     private readonly dataProviderService: DataProviderService,
     private readonly marketDataService: MarketDataService,
     private readonly symbolProfileService: SymbolProfileService
   ) {}
+
+  @OnQueueFailed()
+  public async onFailed(job: Job, error: Error) {
+    if (job.attemptsMade >= (job.opts.attempts ?? 1)) {
+      Logger.warn(
+        `Job ${job.id} (${job.name}) has exhausted all ${job.attemptsMade} attempts. Moving to dead-letter queue.`,
+        'DataGatheringProcessor'
+      );
+
+      await this.deadLetterQueue.add(job.name, {
+        ...job.data,
+        failedAt: new Date().toISOString(),
+        failedReason: error?.message,
+        originalJobId: job.id
+      });
+
+      await job.remove();
+    }
+  }
 
   @Process({
     concurrency: parseInt(

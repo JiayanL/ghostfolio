@@ -6,6 +6,7 @@ import { PrismaService } from '@ghostfolio/api/services/prisma/prisma.service';
 import { PropertyService } from '@ghostfolio/api/services/property/property.service';
 import { SymbolProfileService } from '@ghostfolio/api/services/symbol-profile/symbol-profile.service';
 import {
+  DATA_GATHERING_DEAD_LETTER_QUEUE,
   DATA_GATHERING_QUEUE,
   DATA_GATHERING_QUEUE_PRIORITY_HIGH,
   DATA_GATHERING_QUEUE_PRIORITY_LOW,
@@ -37,6 +38,8 @@ export class DataGatheringService {
   public constructor(
     @Inject('DataEnhancers')
     private readonly dataEnhancers: DataEnhancerInterface[],
+    @InjectQueue(DATA_GATHERING_DEAD_LETTER_QUEUE)
+    private readonly deadLetterQueue: Queue,
     @InjectQueue(DATA_GATHERING_QUEUE)
     private readonly dataGatheringQueue: Queue,
     private readonly dataProviderService: DataProviderService,
@@ -45,6 +48,18 @@ export class DataGatheringService {
     private readonly propertyService: PropertyService,
     private readonly symbolProfileService: SymbolProfileService
   ) {}
+
+  public async getDeadLetterJobs() {
+    return this.deadLetterQueue.getJobs(['waiting', 'active', 'delayed']);
+  }
+
+  public async getDeadLetterJobsCount() {
+    return this.deadLetterQueue.count();
+  }
+
+  public async clearDeadLetterQueue() {
+    return this.deadLetterQueue.empty();
+  }
 
   public async addJobToQueue({
     data,

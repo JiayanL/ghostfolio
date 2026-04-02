@@ -7,7 +7,10 @@ import { PrismaModule } from '@ghostfolio/api/services/prisma/prisma.module';
 import { PropertyModule } from '@ghostfolio/api/services/property/property.module';
 import { DataGatheringService } from '@ghostfolio/api/services/queues/data-gathering/data-gathering.service';
 import { SymbolProfileModule } from '@ghostfolio/api/services/symbol-profile/symbol-profile.module';
-import { DATA_GATHERING_QUEUE } from '@ghostfolio/common/config';
+import {
+  DATA_GATHERING_DEAD_LETTER_QUEUE,
+  DATA_GATHERING_QUEUE
+} from '@ghostfolio/common/config';
 
 import { BullAdapter } from '@bull-board/api/bullAdapter';
 import { BullBoardModule } from '@bull-board/nestjs';
@@ -28,6 +31,14 @@ import { DataGatheringProcessor } from './data-gathering.processor';
               displayName: 'Data Gathering',
               readOnlyMode: process.env.BULL_BOARD_IS_READ_ONLY !== 'false'
             }
+          }),
+          BullBoardModule.forFeature({
+            adapter: BullAdapter,
+            name: DATA_GATHERING_DEAD_LETTER_QUEUE,
+            options: {
+              displayName: 'Data Gathering (Dead Letter)',
+              readOnlyMode: process.env.BULL_BOARD_IS_READ_ONLY !== 'false'
+            }
           })
         ]
       : []),
@@ -37,6 +48,9 @@ import { DataGatheringProcessor } from './data-gathering.processor';
         max: 1
       },
       name: DATA_GATHERING_QUEUE
+    }),
+    BullModule.registerQueue({
+      name: DATA_GATHERING_DEAD_LETTER_QUEUE
     }),
     ConfigurationModule,
     DataEnhancerModule,
@@ -48,6 +62,6 @@ import { DataGatheringProcessor } from './data-gathering.processor';
     SymbolProfileModule
   ],
   providers: [DataGatheringProcessor, DataGatheringService],
-  exports: [BullModule, DataEnhancerModule, DataGatheringService]
+  exports: [BullModule, DataEnhancerModule, DataGatheringService],
 })
 export class DataGatheringModule {}

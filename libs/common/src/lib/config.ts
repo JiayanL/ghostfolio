@@ -62,6 +62,8 @@ export const BULL_BOARD_ROUTE = '/admin/queues';
 export const CACHE_TTL_NO_CACHE = 1;
 export const CACHE_TTL_INFINITE = 0;
 
+export const DATA_GATHERING_DEAD_LETTER_QUEUE =
+  'DATA_GATHERING_DEAD_LETTER_QUEUE';
 export const DATA_GATHERING_QUEUE = 'DATA_GATHERING_QUEUE';
 export const DATA_GATHERING_QUEUE_PRIORITY_HIGH = 1;
 export const DATA_GATHERING_QUEUE_PRIORITY_LOW = Number.MAX_SAFE_INTEGER;
@@ -169,7 +171,8 @@ export const GATHER_ASSET_PROFILE_PROCESS_JOB_OPTIONS: JobOptions = {
     delay: ms('1 minute'),
     type: 'exponential'
   },
-  removeOnComplete: true
+  removeOnComplete: true,
+  removeOnFail: false
 };
 
 export const GATHER_HISTORICAL_MARKET_DATA_PROCESS_JOB_NAME =
@@ -180,7 +183,8 @@ export const GATHER_HISTORICAL_MARKET_DATA_PROCESS_JOB_OPTIONS: JobOptions = {
     delay: ms('1 minute'),
     type: 'exponential'
   },
-  removeOnComplete: true
+  removeOnComplete: true,
+  removeOnFail: false
 };
 
 export const INVESTMENT_ACTIVITY_TYPES = [
