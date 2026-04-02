@@ -11,10 +11,10 @@ export interface PortfolioPosition {
   activitiesCount: number;
   allocationInPercentage: number;
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.assetClass instead */
   assetClass?: AssetClass;
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.assetClassLabel instead */
   assetClassLabel?: string;
 
   assetProfile: Pick<
@@ -34,19 +34,19 @@ export interface PortfolioPosition {
     assetSubClassLabel?: string;
   };
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.assetSubClass instead */
   assetSubClass?: AssetSubClass;
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.assetSubClassLabel instead */
   assetSubClassLabel?: string;
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.countries instead */
   countries: Country[];
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.currency instead */
   currency: string;
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.dataSource instead */
   dataSource: DataSource;
 
   dateOfFirstActivity: Date;
@@ -57,7 +57,7 @@ export interface PortfolioPosition {
   grossPerformancePercentWithCurrencyEffect: number;
   grossPerformanceWithCurrencyEffect: number;
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.holdings instead */
   holdings: Holding[];
 
   investment: number;
@@ -67,7 +67,7 @@ export interface PortfolioPosition {
   markets?: { [key in Market]: number };
   marketsAdvanced?: { [key in MarketAdvanced]: number };
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.name instead */
   name: string;
 
   netPerformance: number;
@@ -76,16 +76,16 @@ export interface PortfolioPosition {
   netPerformanceWithCurrencyEffect: number;
   quantity: number;
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.sectors instead */
   sectors: Sector[];
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.symbol instead */
   symbol: string;
 
   tags?: Tag[];
   type?: string;
 
-  /** @deprecated */
+  /** @deprecated Use {@link PortfolioPosition.assetProfile}.url instead */
   url?: string;
 
   valueInBaseCurrency?: number;
