@@ -21,7 +21,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { SymbolProfile } from '@prisma/client';
 import { Big } from 'big.js';
 import { addHours, isAfter, subDays } from 'date-fns';
-import { uniqBy } from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 import ms from 'ms';
 
 import { BenchmarkValue } from './interfaces/benchmark-value.interface';

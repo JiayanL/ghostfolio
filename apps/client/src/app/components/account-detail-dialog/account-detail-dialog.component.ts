@@ -48,7 +48,7 @@ import {
   cashOutline,
   swapVerticalOutline
 } from 'ionicons/icons';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { forkJoin } from 'rxjs';
 

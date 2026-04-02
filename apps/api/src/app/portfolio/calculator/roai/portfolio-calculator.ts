@@ -21,7 +21,8 @@ import {
   isBefore,
   isThisYear
 } from 'date-fns';
-import { cloneDeep, sortBy } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import sortBy from 'lodash/sortBy';
 
 export class RoaiPortfolioCalculator extends PortfolioCalculator {
   private chartDates: string[];

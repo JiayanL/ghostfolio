@@ -80,7 +80,9 @@ import {
   User as UserModel
 } from '@prisma/client';
 import { format, parseISO } from 'date-fns';
-import { cloneDeep, groupBy, isNumber } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import groupBy from 'lodash/groupBy';
+import isNumber from 'lodash/isNumber';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

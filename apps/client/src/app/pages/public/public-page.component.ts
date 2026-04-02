@@ -29,7 +29,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssetClass } from '@prisma/client';
 import { StatusCodes } from 'http-status-codes';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';

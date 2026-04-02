@@ -49,7 +49,7 @@ import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Prisma, Role, User } from '@prisma/client';
 import { differenceInDays, subDays } from 'date-fns';
-import { without } from 'lodash';
+import without from 'lodash/without';
 import { createHmac } from 'node:crypto';
 
 @Injectable()

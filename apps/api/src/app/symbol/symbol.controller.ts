@@ -23,7 +23,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { DataSource } from '@prisma/client';
 import { parseISO } from 'date-fns';
 import { StatusCodes, getReasonPhrase } from 'http-status-codes';
-import { isDate, isEmpty } from 'lodash';
+import isDate from 'lodash/isDate';
+import isEmpty from 'lodash/isEmpty';
 
 import { SymbolService } from './symbol.service';
 

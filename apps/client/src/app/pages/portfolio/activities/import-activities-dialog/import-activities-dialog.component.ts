@@ -50,7 +50,8 @@ import { IonIcon } from '@ionic/angular/standalone';
 import { AssetClass } from '@prisma/client';
 import { addIcons } from 'ionicons';
 import { cloudUploadOutline, warningOutline } from 'ionicons/icons';
-import { isArray, sortBy } from 'lodash';
+import isArray from 'lodash/isArray';
+import sortBy from 'lodash/sortBy';
 import ms from 'ms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 

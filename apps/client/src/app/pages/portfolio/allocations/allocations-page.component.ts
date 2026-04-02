@@ -40,7 +40,7 @@ import {
   DataSource,
   Platform
 } from '@prisma/client';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({

@@ -10,7 +10,7 @@ import { Activity } from '@ghostfolio/common/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account, DataSource, Type as ActivityType } from '@prisma/client';
-import { isFinite } from 'lodash';
+import isFinite from 'lodash/isFinite';
 import { parse as csvToJson } from 'papaparse';
 import { EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';

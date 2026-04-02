@@ -39,7 +39,8 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
 import { User as UserModel } from '@prisma/client';
 import { StatusCodes, getReasonPhrase } from 'http-status-codes';
-import { merge, size } from 'lodash';
+import merge from 'lodash/merge';
+import size from 'lodash/size';
 
 import { UserService } from './user.service';
 

@@ -41,7 +41,8 @@ import {
   parse,
   parseISO
 } from 'date-fns';
-import { first, last } from 'lodash';
+import first from 'lodash/first';
+import last from 'lodash/last';
 import ms from 'ms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { parse as csvToJson } from 'papaparse';

@@ -14,7 +14,7 @@ import {
   Min,
   Validate
 } from 'class-validator';
-import { isString } from 'lodash';
+import isString from 'lodash/isString';
 
 export class CreateOrderDto {
   @IsOptional()

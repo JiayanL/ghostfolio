@@ -28,7 +28,7 @@ import { Injectable, inject } from '@angular/core';
 import { SortDirection } from '@angular/material/sort';
 import { DataSource, MarketData, Platform } from '@prisma/client';
 import { JobStatus } from 'bull';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 
 import { DataService } from './data.service';
 

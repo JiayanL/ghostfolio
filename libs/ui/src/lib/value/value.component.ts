@@ -20,7 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { copyOutline } from 'ionicons/icons';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import ms from 'ms';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 

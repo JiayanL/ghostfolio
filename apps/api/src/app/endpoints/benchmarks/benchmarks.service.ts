@@ -13,7 +13,7 @@ import { DateRange, UserWithSettings } from '@ghostfolio/common/types';
 
 import { Injectable, Logger } from '@nestjs/common';
 import { format, isSameDay } from 'date-fns';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 
 @Injectable()
 export class BenchmarksService {

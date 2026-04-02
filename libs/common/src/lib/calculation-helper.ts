@@ -9,7 +9,8 @@ import {
   subDays,
   subYears
 } from 'date-fns';
-import { isFinite, isNumber } from 'lodash';
+import isFinite from 'lodash/isFinite';
+import isNumber from 'lodash/isNumber';
 
 import { resetHours } from './helper';
 import { DateRange } from './types';
