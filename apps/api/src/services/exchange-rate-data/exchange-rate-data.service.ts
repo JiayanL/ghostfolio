@@ -70,7 +70,7 @@ export class ExchangeRateDataService {
       [currency: string]: { [dateString: string]: number };
     } = {};
 
-    for (const currency of currencies) {
+    for (const currency of currencies.filter(Boolean)) {
       exchangeRatesByCurrency[`${currency}${targetCurrency}`] =
         await this.getExchangeRates({
           startDate,
@@ -229,6 +229,15 @@ export class ExchangeRateDataService {
       return 0;
     }
 
+    if (!aFromCurrency || !aToCurrency) {
+      Logger.warn(
+        `Missing currency: fromCurrency=${aFromCurrency}, toCurrency=${aToCurrency}`,
+        'ExchangeRateDataService'
+      );
+
+      return aValue;
+    }
+
     let factor: number;
 
     if (aFromCurrency === aToCurrency) {
@@ -269,6 +278,15 @@ export class ExchangeRateDataService {
   ) {
     if (aValue === 0) {
       return 0;
+    }
+
+    if (!aFromCurrency || !aToCurrency) {
+      Logger.warn(
+        `Missing currency: fromCurrency=${aFromCurrency}, toCurrency=${aToCurrency}`,
+        'ExchangeRateDataService'
+      );
+
+      return undefined;
     }
 
     if (isToday(aDate)) {
@@ -513,7 +531,12 @@ export class ExchangeRateDataService {
       await this.prismaService.symbolProfile.findMany({
         distinct: ['currency'],
         orderBy: [{ currency: 'asc' }],
-        select: { currency: true }
+        select: { currency: true },
+        where: {
+          currency: {
+            not: null
+          }
+        }
       })
     ).forEach(({ currency }) => {
       currencies.push(currency);
