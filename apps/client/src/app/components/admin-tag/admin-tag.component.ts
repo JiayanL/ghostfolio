@@ -30,7 +30,7 @@ import {
   ellipsisHorizontal,
   trashOutline
 } from 'ionicons/icons';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { GfCreateOrUpdateTagDialogComponent } from './create-or-update-tag-dialog/create-or-update-tag-dialog.component';

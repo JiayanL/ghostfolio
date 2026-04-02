@@ -41,7 +41,7 @@ import {
   isSameDay,
   parseISO
 } from 'date-fns';
-import { uniqBy } from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 
 @Injectable()
 export class FinancialModelingPrepService

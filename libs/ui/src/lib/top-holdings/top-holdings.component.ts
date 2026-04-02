@@ -26,7 +26,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { capitalize } from 'lodash';
+import capitalize from 'lodash/capitalize';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { GfValueComponent } from '../value/value.component';

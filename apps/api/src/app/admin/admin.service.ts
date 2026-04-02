@@ -50,7 +50,7 @@ import {
 } from '@prisma/client';
 import { differenceInDays } from 'date-fns';
 import { StatusCodes, getReasonPhrase } from 'http-status-codes';
-import { groupBy } from 'lodash';
+import groupBy from 'lodash/groupBy';
 
 @Injectable()
 export class AdminService {

@@ -34,7 +34,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { ellipsisHorizontal, trashOutline } from 'ionicons/icons';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 import { translate } from '../i18n';

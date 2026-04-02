@@ -31,7 +31,7 @@ import { Chart, Tooltip } from 'chart.js';
 import { TreemapController, TreemapElement } from 'chartjs-chart-treemap';
 import { isUUID } from 'class-validator';
 import { differenceInDays, max } from 'date-fns';
-import { orderBy } from 'lodash';
+import orderBy from 'lodash/orderBy';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import OpenColor from 'open-color';
 

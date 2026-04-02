@@ -11,7 +11,8 @@ import {
 
 import { Injectable } from '@nestjs/common';
 import { Platform, Prisma } from '@prisma/client';
-import { groupBy, uniqBy } from 'lodash';
+import groupBy from 'lodash/groupBy';
+import uniqBy from 'lodash/uniqBy';
 
 @Injectable()
 export class ExportService {

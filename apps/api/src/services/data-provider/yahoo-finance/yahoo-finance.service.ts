@@ -22,7 +22,7 @@ import {
 import { Injectable, Logger } from '@nestjs/common';
 import { DataSource, SymbolProfile } from '@prisma/client';
 import { addDays, format, isSameDay } from 'date-fns';
-import { uniqBy } from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 import YahooFinance from 'yahoo-finance2';
 import { ChartResultArray } from 'yahoo-finance2/esm/src/modules/chart';
 import {

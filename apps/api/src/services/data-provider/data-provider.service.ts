@@ -33,7 +33,10 @@ import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { DataSource, MarketData, Prisma, SymbolProfile } from '@prisma/client';
 import { Big } from 'big.js';
 import { eachDayOfInterval, format, isValid } from 'date-fns';
-import { groupBy, isEmpty, isNumber, uniqWith } from 'lodash';
+import groupBy from 'lodash/groupBy';
+import isEmpty from 'lodash/isEmpty';
+import isNumber from 'lodash/isNumber';
+import uniqWith from 'lodash/uniqWith';
 import ms from 'ms';
 
 import { AssetProfileInvalidError } from './errors/asset-profile-invalid.error';

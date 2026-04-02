@@ -38,7 +38,7 @@ import {
   closeOutline,
   searchOutline
 } from 'ionicons/icons';
-import { isFunction } from 'lodash';
+import isFunction from 'lodash/isFunction';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { EMPTY, Observable, Subject, merge, of } from 'rxjs';
 import {

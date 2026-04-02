@@ -35,7 +35,8 @@ import { Injectable } from '@nestjs/common';
 import { DataSource, Prisma } from '@prisma/client';
 import { Big } from 'big.js';
 import { endOfToday, isAfter, isSameSecond, parseISO } from 'date-fns';
-import { omit, uniqBy } from 'lodash';
+import omit from 'lodash/omit';
+import uniqBy from 'lodash/uniqBy';
 import { randomUUID } from 'node:crypto';
 
 import { ImportDataDto } from './import-data.dto';

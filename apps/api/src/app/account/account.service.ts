@@ -17,7 +17,7 @@ import {
 } from '@prisma/client';
 import { Big } from 'big.js';
 import { format } from 'date-fns';
-import { groupBy } from 'lodash';
+import groupBy from 'lodash/groupBy';
 
 import { CashDetails } from './interfaces/cash-details.interface';
 

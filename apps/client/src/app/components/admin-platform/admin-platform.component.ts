@@ -31,7 +31,7 @@ import {
   ellipsisHorizontal,
   trashOutline
 } from 'ionicons/icons';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { GfCreateOrUpdatePlatformDialogComponent } from './create-or-update-platform-dialog/create-or-update-platform-dialog.component';

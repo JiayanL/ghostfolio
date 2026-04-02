@@ -40,7 +40,8 @@ import {
 import { Big } from 'big.js';
 import { isUUID } from 'class-validator';
 import { endOfToday, isAfter } from 'date-fns';
-import { groupBy, uniqBy } from 'lodash';
+import groupBy from 'lodash/groupBy';
+import uniqBy from 'lodash/uniqBy';
 import { randomUUID } from 'node:crypto';
 
 @Injectable()

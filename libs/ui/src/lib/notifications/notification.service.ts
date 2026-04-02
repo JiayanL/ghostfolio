@@ -3,7 +3,7 @@ import { translate } from '@ghostfolio/ui/i18n';
 
 import { inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { isFunction } from 'lodash';
+import isFunction from 'lodash/isFunction';
 
 import { GfAlertDialogComponent } from './alert-dialog/alert-dialog.component';
 import { GfConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';

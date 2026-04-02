@@ -39,7 +39,8 @@ import {
   ellipsisHorizontal,
   trashOutline
 } from 'ionicons/icons';
-import { get, isNil } from 'lodash';
+import get from 'lodash/get';
+import isNil from 'lodash/isNil';
 
 import { GfValueComponent } from '../value';
 
