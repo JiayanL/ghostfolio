@@ -6,7 +6,7 @@ import { ExportResponse } from '@ghostfolio/common/interfaces';
 import { Injectable, Logger } from '@nestjs/common';
 import { existsSync, mkdirSync, readdirSync, statSync, unlinkSync } from 'fs';
 import { writeFile } from 'fs/promises';
-import { join } from 'path';
+import { basename, join, resolve } from 'path';
 
 export interface BackupFileInfo {
   createdAt: string;
@@ -76,13 +76,19 @@ export class BackupService {
   }
 
   public getBackupFilePath(fileName: string): string | undefined {
-    const backupPath = this.getBackupPath();
-    const filePath = join(backupPath, fileName);
+    const sanitizedFileName = basename(fileName);
 
     if (
-      !fileName.startsWith('ghostfolio-backup-') ||
-      !fileName.endsWith('.json')
+      !sanitizedFileName.startsWith('ghostfolio-backup-') ||
+      !sanitizedFileName.endsWith('.json')
     ) {
+      return undefined;
+    }
+
+    const backupPath = resolve(this.getBackupPath());
+    const filePath = resolve(join(backupPath, sanitizedFileName));
+
+    if (!filePath.startsWith(backupPath)) {
       return undefined;
     }
 
