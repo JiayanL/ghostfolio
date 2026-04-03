@@ -2,6 +2,8 @@ import { CleanedEnvAccessors } from 'envalid';
 
 export interface Environment extends CleanedEnvAccessors {
   ACCESS_TOKEN_SALT: string;
+  BACKUP_PATH: string;
+  BACKUP_RETENTION_DAYS: number;
   API_KEY_ALPHA_VANTAGE: string;
   API_KEY_BETTER_UPTIME: string;
   API_KEY_COINGECKO_DEMO: string;
@@ -17,6 +19,7 @@ export interface Environment extends CleanedEnvAccessors {
   DATA_SOURCE_IMPORT: string;
   DATA_SOURCES: string[];
   DATA_SOURCES_GHOSTFOLIO_DATA_PROVIDER: string[];
+  ENABLE_FEATURE_BACKUP: boolean;
   ENABLE_FEATURE_AUTH_GOOGLE: boolean;
   ENABLE_FEATURE_AUTH_OIDC: boolean;
   ENABLE_FEATURE_AUTH_TOKEN: boolean;

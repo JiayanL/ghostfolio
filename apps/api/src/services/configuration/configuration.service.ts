@@ -22,6 +22,8 @@ export class ConfigurationService {
   public constructor() {
     this.environmentConfiguration = cleanEnv(process.env, {
       ACCESS_TOKEN_SALT: str(),
+      BACKUP_PATH: str({ default: './backups' }),
+      BACKUP_RETENTION_DAYS: num({ default: 30 }),
       API_KEY_ALPHA_VANTAGE: str({ default: '' }),
       API_KEY_BETTER_UPTIME: str({ default: '' }),
       API_KEY_COINGECKO_DEMO: str({ default: '' }),
@@ -41,6 +43,7 @@ export class ConfigurationService {
       DATA_SOURCES_GHOSTFOLIO_DATA_PROVIDER: json({
         default: []
       }),
+      ENABLE_FEATURE_BACKUP: bool({ default: false }),
       ENABLE_FEATURE_AUTH_GOOGLE: bool({ default: false }),
       ENABLE_FEATURE_AUTH_OIDC: bool({ default: false }),
       ENABLE_FEATURE_AUTH_TOKEN: bool({ default: true }),

@@ -1,3 +1,4 @@
+import { BackupModule } from '@ghostfolio/api/app/backup/backup.module';
 import { UserModule } from '@ghostfolio/api/app/user/user.module';
 import { ConfigurationModule } from '@ghostfolio/api/services/configuration/configuration.module';
 import { ExchangeRateDataModule } from '@ghostfolio/api/services/exchange-rate-data/exchange-rate-data.module';
@@ -11,6 +12,7 @@ import { CronService } from './cron.service';
 
 @Module({
   imports: [
+    BackupModule,
     ConfigurationModule,
     DataGatheringModule,
     ExchangeRateDataModule,
