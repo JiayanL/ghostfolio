@@ -35,6 +35,15 @@
             [url]="platformForm.get('url').value"
           />
         }
+        @if (platformForm.get('url')?.hasError('pattern')) {
+          <mat-error i18n
+            >The URL is not valid (use format https://...)</mat-error
+          >
+        } @else if (platformForm.get('url')?.hasError('validationError')) {
+          <mat-error>{{
+            platformForm.get('url')?.getError('validationError')
+          }}</mat-error>
+        }
       </mat-form-field>
     </div>
   </div>
