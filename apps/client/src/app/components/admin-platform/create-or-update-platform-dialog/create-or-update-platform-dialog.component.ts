@@ -47,7 +47,10 @@ export class GfCreateOrUpdatePlatformDialogComponent {
   ) {
     this.platformForm = this.formBuilder.group({
       name: [this.data.platform.name, Validators.required],
-      url: [this.data.platform.url ?? 'https://', Validators.required]
+      url: [
+        this.data.platform.url ?? 'https://',
+        [Validators.required, Validators.pattern(/^https:\/\/.+/)]
+      ]
     });
   }
 
