@@ -153,7 +153,7 @@ export class BenchmarksService {
         value:
           this.benchmarkService.calculateChangeInPercentage(
             marketPriceAtStartDate,
-            (currentSymbolItem.marketPrice * exchangeRateFactor) as number
+            Number(currentSymbolItem.marketPrice) * exchangeRateFactor
           ) * 100
       });
     }

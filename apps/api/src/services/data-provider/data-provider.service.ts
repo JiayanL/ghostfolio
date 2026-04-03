@@ -382,7 +382,9 @@ export class DataProviderService implements OnModuleInit {
 
         r[symbol] = {
           ...(r[symbol] || {}),
-          [format(new Date(date), DATE_FORMAT)]: { marketPrice }
+          [format(new Date(date), DATE_FORMAT)]: {
+            marketPrice: Number(marketPrice)
+          }
         };
 
         return r;
