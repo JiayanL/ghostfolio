@@ -138,3 +138,6 @@ Generate `localhost.cert` and `localhost.pem` files.
 openssl req -x509 -newkey rsa:2048 -nodes -keyout apps/client/localhost.pem -out apps/client/localhost.cert -days 365 \
   -subj "/C=CH/ST=State/L=City/O=Organization/OU=Unit/CN=localhost"
 ```
+
+### Notes on dependencies
+The `react` and `react-dom` packages in `package.json` devDependencies are required exclusively for Storybook and are not used in the application source code.
