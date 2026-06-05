@@ -99,6 +99,11 @@ export const routes: Routes = [
       import('./pages/portfolio/portfolio-page.routes').then((m) => m.routes)
   },
   {
+    path: internalRoutes.trade.path,
+    loadChildren: () =>
+      import('./pages/trade/trade-page.routes').then((m) => m.routes)
+  },
+  {
     path: publicRoutes.pricing.path,
     loadChildren: () =>
       import('./pages/pricing/pricing-page.routes').then((m) => m.routes)

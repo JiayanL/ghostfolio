@@ -50,6 +50,20 @@
           i18n
           mat-flat-button
           [ngClass]="{
+            'font-weight-bold': currentRoute === internalRoutes.trade.path,
+            'text-decoration-underline':
+              currentRoute === internalRoutes.trade.path
+          }"
+          [routerLink]="routerLinkTrade"
+          >Trade</a
+        >
+      </li>
+      <li class="list-inline-item">
+        <a
+          class="d-none d-sm-block"
+          i18n
+          mat-flat-button
+          [ngClass]="{
             'font-weight-bold': currentRoute === internalRoutes.accounts.path,
             'text-decoration-underline':
               currentRoute === internalRoutes.accounts.path
@@ -256,6 +270,16 @@
             }"
             [routerLink]="routerLinkPortfolio"
             >Portfolio</a
+          >
+          <a
+            class="d-flex d-sm-none"
+            i18n
+            mat-menu-item
+            [ngClass]="{
+              'font-weight-bold': currentRoute === internalRoutes.trade.path
+            }"
+            [routerLink]="routerLinkTrade"
+            >Trade</a
           >
           <a
             class="d-flex d-sm-none"

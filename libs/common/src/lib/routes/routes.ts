@@ -118,6 +118,28 @@ export const internalRoutes: Record<string, InternalRoute> = {
     routerLink: ['/i18n'],
     title: $localize`Internationalization`
   },
+  trade: {
+    path: 'trade',
+    routerLink: ['/trade'],
+    subRoutes: {
+      orders: {
+        path: 'orders',
+        routerLink: ['/trade', 'orders'],
+        title: $localize`Orders`
+      },
+      positions: {
+        path: 'positions',
+        routerLink: ['/trade', 'positions'],
+        title: $localize`Positions`
+      },
+      trade: {
+        path: undefined,
+        routerLink: ['/trade'],
+        title: $localize`Trade`
+      }
+    },
+    title: $localize`Trade`
+  },
   portfolio: {
     path: 'portfolio',
     routerLink: ['/portfolio'],

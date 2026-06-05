@@ -1,0 +1,302 @@
+<div class="container py-3">
+  <div class="row">
+    <div class="col">
+      <h1 class="d-none d-sm-block h3 mb-3 text-center" i18n>Trade</h1>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="row">
+      <div class="col-lg-3 mb-3">
+        <ngx-skeleton-loader animation="pulse" count="6" />
+      </div>
+      <div class="col-lg-5 mb-3">
+        <ngx-skeleton-loader animation="pulse" count="8" />
+      </div>
+      <div class="col-lg-4 mb-3">
+        <ngx-skeleton-loader animation="pulse" count="6" />
+      </div>
+    </div>
+  } @else {
+    <div class="row">
+      <!-- Quote list -->
+      <div class="col-lg-3 mb-3">
+        <div class="gf-trade-card h-100">
+          <h2 class="h6 mb-3 text-muted" i18n>Market Watch</h2>
+          <div class="quote-list">
+            @for (quote of quotes; track quote.symbol) {
+              <button
+                class="quote-item w-100"
+                type="button"
+                [class.active]="selectedQuote?.symbol === quote.symbol"
+                (click)="onSelectQuote(quote)"
+              >
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="font-weight-bold">{{ quote.symbol }}</div>
+                    <div class="small text-muted text-truncate quote-name">
+                      {{ quote.name }}
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <gf-value
+                      [isCurrency]="true"
+                      [locale]="user?.settings?.locale"
+                      [value]="quote.price"
+                    />
+                    <div class="d-flex align-items-center justify-content-end">
+                      <gf-trend-indicator
+                        size="small"
+                        [value]="quote.changePercent"
+                      />
+                      <gf-value
+                        class="ml-1"
+                        [colorizeSign]="true"
+                        [isPercent]="true"
+                        [locale]="user?.settings?.locale"
+                        [value]="quote.changePercent"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote detail & market depth -->
+      <div class="col-lg-5 mb-3">
+        <div class="gf-trade-card h-100">
+          @if (selectedQuote) {
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h2 class="h4 mb-0">{{ selectedQuote.symbol }}</h2>
+                <div class="text-muted">{{ selectedQuote.name }}</div>
+              </div>
+              <div class="text-right">
+                <gf-value
+                  size="large"
+                  [isCurrency]="true"
+                  [locale]="user?.settings?.locale"
+                  [value]="selectedQuote.price"
+                />
+                <div class="d-flex align-items-center justify-content-end">
+                  <gf-trend-indicator
+                    size="medium"
+                    [value]="selectedQuote.changePercent"
+                  />
+                  <gf-value
+                    class="ml-1"
+                    [colorizeSign]="true"
+                    [isCurrency]="true"
+                    [locale]="user?.settings?.locale"
+                    [value]="selectedQuote.change"
+                  />
+                  <gf-value
+                    class="ml-1"
+                    [colorizeSign]="true"
+                    [isPercent]="true"
+                    [locale]="user?.settings?.locale"
+                    [value]="selectedQuote.changePercent"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-4">
+                <div class="stat-label" i18n>Open</div>
+                <gf-value
+                  [isCurrency]="true"
+                  [locale]="user?.settings?.locale"
+                  [value]="selectedQuote.open"
+                />
+              </div>
+              <div class="col-4">
+                <div class="stat-label" i18n>High</div>
+                <gf-value
+                  [isCurrency]="true"
+                  [locale]="user?.settings?.locale"
+                  [value]="selectedQuote.high"
+                />
+              </div>
+              <div class="col-4">
+                <div class="stat-label" i18n>Low</div>
+                <gf-value
+                  [isCurrency]="true"
+                  [locale]="user?.settings?.locale"
+                  [value]="selectedQuote.low"
+                />
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-6">
+                <div class="stat-label" i18n>Bid</div>
+                <gf-value
+                  class="text-success"
+                  [isCurrency]="true"
+                  [locale]="user?.settings?.locale"
+                  [value]="selectedQuote.bid"
+                />
+              </div>
+              <div class="col-6">
+                <div class="stat-label" i18n>Ask</div>
+                <gf-value
+                  class="text-danger"
+                  [isCurrency]="true"
+                  [locale]="user?.settings?.locale"
+                  [value]="selectedQuote.ask"
+                />
+              </div>
+            </div>
+
+            <h3 class="h6 mb-2 text-muted" i18n>Market Depth</h3>
+            <div class="market-depth">
+              <div class="depth-row depth-header">
+                <span i18n>Price</span>
+                <span i18n>Size</span>
+                <span i18n>Total</span>
+              </div>
+              @for (level of [1, 2, 3, 4, 5]; track level) {
+                <div class="depth-row depth-ask">
+                  <span>{{
+                    (selectedQuote.ask + level * 0.05).toFixed(2)
+                  }}</span>
+                  <span>{{ level * 150 | number }}</span>
+                  <span>{{
+                    (selectedQuote.ask + level * 0.05) * level * 150
+                      | number: '1.0-0'
+                  }}</span>
+                </div>
+              }
+              <div class="depth-spread">
+                <span i18n>Spread</span>
+                <gf-value
+                  [isCurrency]="true"
+                  [locale]="user?.settings?.locale"
+                  [value]="selectedQuote.ask - selectedQuote.bid"
+                />
+              </div>
+              @for (level of [5, 4, 3, 2, 1]; track level) {
+                <div class="depth-row depth-bid">
+                  <span>{{
+                    (selectedQuote.bid - level * 0.05).toFixed(2)
+                  }}</span>
+                  <span>{{ level * 200 | number }}</span>
+                  <span>{{
+                    (selectedQuote.bid - level * 0.05) * level * 200
+                      | number: '1.0-0'
+                  }}</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Order entry -->
+      <div class="col-lg-4 mb-3">
+        <div class="gf-trade-card h-100">
+          <h2 class="h6 mb-3 text-muted" i18n>Place Order</h2>
+
+          <form [formGroup]="orderForm" (ngSubmit)="onSubmitOrder()">
+            <mat-button-toggle-group
+              class="w-100 mb-3 side-toggle"
+              formControlName="side"
+            >
+              <mat-button-toggle class="flex-grow-1 buy-toggle" value="BUY">
+                <span i18n>Buy</span>
+              </mat-button-toggle>
+              <mat-button-toggle class="flex-grow-1 sell-toggle" value="SELL">
+                <span i18n>Sell</span>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label i18n>Order Type</mat-label>
+              <mat-select
+                formControlName="orderType"
+                (selectionChange)="onOrderTypeChange()"
+              >
+                <mat-option i18n value="MARKET">Market</mat-option>
+                <mat-option i18n value="LIMIT">Limit</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label i18n>Quantity</mat-label>
+              <input
+                formControlName="quantity"
+                matInput
+                min="1"
+                step="1"
+                type="number"
+              />
+            </mat-form-field>
+
+            @if (isLimitOrder) {
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label i18n>Limit Price</mat-label>
+                <input
+                  formControlName="limitPrice"
+                  matInput
+                  min="0.01"
+                  step="0.01"
+                  type="number"
+                />
+              </mat-form-field>
+            }
+
+            <div class="order-summary mb-3">
+              <div class="d-flex justify-content-between mb-1">
+                <span class="text-muted" i18n>Symbol</span>
+                <span class="font-weight-bold">{{
+                  selectedQuote?.symbol
+                }}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-1">
+                <span class="text-muted" i18n>Est. Price</span>
+                <gf-value
+                  [isCurrency]="true"
+                  [locale]="user?.settings?.locale"
+                  [value]="
+                    isLimitOrder
+                      ? orderForm.controls.limitPrice.value
+                      : selectedQuote?.price
+                  "
+                />
+              </div>
+              <div class="d-flex justify-content-between">
+                <span class="text-muted" i18n>Est. Total</span>
+                <gf-value
+                  [isCurrency]="true"
+                  [locale]="user?.settings?.locale"
+                  [value]="estimatedTotal"
+                />
+              </div>
+            </div>
+
+            <button
+              class="w-100 submit-btn"
+              mat-flat-button
+              type="submit"
+              [class.buy-btn]="!isSellOrder"
+              [class.sell-btn]="isSellOrder"
+              [disabled]="orderForm.invalid || isSubmitting"
+            >
+              @if (isSubmitting) {
+                <span i18n>Submitting...</span>
+              } @else if (isSellOrder) {
+                <span i18n>Sell {{ selectedQuote?.symbol }}</span>
+              } @else {
+                <span i18n>Buy {{ selectedQuote?.symbol }}</span>
+              }
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  }
+</div>

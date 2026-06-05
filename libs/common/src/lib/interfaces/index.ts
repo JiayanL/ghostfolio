@@ -76,6 +76,9 @@ import type { PortfolioPerformanceResponse } from './responses/portfolio-perform
 import type { PortfolioReportResponse } from './responses/portfolio-report.interface';
 import type { PublicPortfolioResponse } from './responses/public-portfolio-response.interface';
 import type { QuotesResponse } from './responses/quotes-response.interface';
+import type { TradeOrdersResponse } from './responses/trade-orders-response.interface';
+import type { TradePositionsResponse } from './responses/trade-positions-response.interface';
+import type { TradeQuotesResponse } from './responses/trade-quotes-response.interface';
 import type { WatchlistResponse } from './responses/watchlist-response.interface';
 import type { RuleSettings } from './rule-settings.interface';
 import type { ScraperConfiguration } from './scraper-configuration.interface';
@@ -92,6 +95,14 @@ import type { SymbolMetrics } from './symbol-metrics.interface';
 import type { SystemMessage } from './system-message.interface';
 import type { TabConfiguration } from './tab-configuration.interface';
 import type { ToggleOption } from './toggle-option.interface';
+import type {
+  TradeOrder,
+  TradeOrderSide,
+  TradeOrderStatus,
+  TradeOrderType
+} from './trade-order.interface';
+import type { TradePosition } from './trade-position.interface';
+import type { TradeQuote } from './trade-quote.interface';
 import type { UserItem } from './user-item.interface';
 import type { UserSettings } from './user-settings.interface';
 import type { User } from './user.interface';
@@ -186,6 +197,15 @@ export {
   SystemMessage,
   TabConfiguration,
   ToggleOption,
+  TradeOrder,
+  TradeOrdersResponse,
+  TradeOrderSide,
+  TradeOrderStatus,
+  TradeOrderType,
+  TradePosition,
+  TradePositionsResponse,
+  TradeQuote,
+  TradeQuotesResponse,
   User,
   UserItem,
   UserSettings,

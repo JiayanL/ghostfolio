@@ -1,0 +1,82 @@
+{
+  "quotes": [
+    {
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "price": 250.12,
+      "change": 2.45,
+      "changePercent": 0.0099,
+      "bid": 250.08,
+      "ask": 250.15,
+      "volume": 48234567,
+      "high": 251.8,
+      "low": 247.5,
+      "open": 248.9
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft Corporation",
+      "price": 420.55,
+      "change": -1.23,
+      "changePercent": -0.0029,
+      "bid": 420.5,
+      "ask": 420.6,
+      "volume": 22134567,
+      "high": 423.1,
+      "low": 418.2,
+      "open": 421.5
+    },
+    {
+      "symbol": "GOOGL",
+      "name": "Alphabet Inc.",
+      "price": 175.3,
+      "change": 3.15,
+      "changePercent": 0.0183,
+      "bid": 175.25,
+      "ask": 175.35,
+      "volume": 18234567,
+      "high": 176.0,
+      "low": 172.8,
+      "open": 173.1
+    },
+    {
+      "symbol": "AMZN",
+      "name": "Amazon.com Inc.",
+      "price": 198.75,
+      "change": 0.85,
+      "changePercent": 0.0043,
+      "bid": 198.7,
+      "ask": 198.8,
+      "volume": 31234567,
+      "high": 199.5,
+      "low": 196.2,
+      "open": 197.4
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA Corporation",
+      "price": 875.4,
+      "change": 12.6,
+      "changePercent": 0.0146,
+      "bid": 875.2,
+      "ask": 875.6,
+      "volume": 55234567,
+      "high": 880.0,
+      "low": 860.5,
+      "open": 865.0
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla Inc.",
+      "price": 245.8,
+      "change": -5.2,
+      "changePercent": -0.0207,
+      "bid": 245.7,
+      "ask": 245.9,
+      "volume": 78234567,
+      "high": 252.0,
+      "low": 243.5,
+      "open": 250.3
+    }
+  ]
+}

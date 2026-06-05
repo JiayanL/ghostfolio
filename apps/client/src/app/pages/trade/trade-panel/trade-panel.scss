@@ -1,0 +1,142 @@
+.gf-trade-card {
+  background: rgb(var(--palette-background-card));
+  border: 1px solid rgba(var(--dark-dividers));
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+
+:host-context(.theme-dark) {
+  .gf-trade-card {
+    background: rgb(var(--palette-background-card-dark));
+    border-color: rgba(var(--light-dividers));
+  }
+}
+
+.quote-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.quote-item {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  padding: 0.625rem 0.75rem;
+  text-align: left;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: rgba(
+      var(--palette-background-hover),
+      var(--palette-background-hover-alpha)
+    );
+  }
+
+  &.active {
+    background: rgba(var(--palette-primary), 0.08);
+    border-color: rgba(var(--palette-primary), 0.3);
+  }
+}
+
+.quote-name {
+  max-width: 8rem;
+}
+
+.stat-label {
+  color: rgba(var(--dark-secondary-text));
+  font-size: 0.75rem;
+  margin-bottom: 0.125rem;
+  text-transform: uppercase;
+}
+
+:host-context(.theme-dark) {
+  .stat-label {
+    color: rgba(var(--light-secondary-text));
+  }
+}
+
+.market-depth {
+  font-size: 0.8125rem;
+}
+
+.depth-row {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0.25rem 0.5rem;
+}
+
+.depth-header {
+  color: rgba(var(--dark-secondary-text));
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.depth-ask span:first-child {
+  color: var(--danger);
+}
+
+.depth-bid span:first-child {
+  color: var(--success);
+}
+
+.depth-spread {
+  align-items: center;
+  border-bottom: 1px solid rgba(var(--dark-dividers));
+  border-top: 1px solid rgba(var(--dark-dividers));
+  display: flex;
+  font-size: 0.75rem;
+  font-weight: 600;
+  justify-content: space-between;
+  margin: 0.25rem 0;
+  padding: 0.375rem 0.5rem;
+}
+
+:host-context(.theme-dark) {
+  .depth-spread {
+    border-color: rgba(var(--light-dividers));
+  }
+}
+
+.side-toggle {
+  ::ng-deep .mat-button-toggle {
+    flex: 1;
+  }
+}
+
+.buy-toggle.mat-button-toggle-checked {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: var(--success);
+}
+
+.sell-toggle.mat-button-toggle-checked {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: var(--danger);
+}
+
+.order-summary {
+  background: rgba(
+    var(--palette-background-hover),
+    var(--palette-background-hover-alpha)
+  );
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+}
+
+.submit-btn {
+  font-size: 1rem;
+  height: 2.75rem;
+}
+
+.buy-btn:not([disabled]) {
+  background-color: var(--success) !important;
+  color: white !important;
+}
+
+.sell-btn:not([disabled]) {
+  background-color: var(--danger) !important;
+  color: white !important;
+}

@@ -1,5 +1,5 @@
-import { createServer } from 'node:http';
 import { readFileSync } from 'node:fs';
+import { createServer } from 'node:http';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -294,6 +294,42 @@ const routes = [
   {
     method: 'DELETE',
     path: '/api/v1/watchlist/:dataSource/:symbol',
+    handler: () => ({})
+  },
+
+  // ─── Trade (Broking UI) ─────────────────────────────────────────────────────
+  {
+    method: 'GET',
+    path: '/api/v1/trade/quotes',
+    handler: () => load('trade-quotes.json')
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/trade/orders',
+    handler: () => load('trade-orders.json')
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/trade/positions',
+    handler: () => load('trade-positions.json')
+  },
+  {
+    method: 'POST',
+    path: '/api/v1/trade/orders',
+    handler: (_params, body) => ({
+      id: `ord-${Date.now()}`,
+      ...body,
+      status: body?.type === 'MARKET' ? 'FILLED' : 'PENDING',
+      filledPrice:
+        body?.type === 'MARKET' ? (body?.limitPrice ?? 0) : undefined,
+      createdAt: new Date().toISOString(),
+      filledAt: body?.type === 'MARKET' ? new Date().toISOString() : undefined
+    }),
+    status: 201
+  },
+  {
+    method: 'DELETE',
+    path: '/api/v1/trade/orders/:id',
     handler: () => ({})
   },
 
@@ -679,7 +715,10 @@ const server = createServer((req, res) => {
           const result = route.handler(params, parsedBody);
           json(res, result, route.status ?? 200);
         } catch (err) {
-          console.error(`[mock-api] Error handling ${method} ${pathname}:`, err);
+          console.error(
+            `[mock-api] Error handling ${method} ${pathname}:`,
+            err
+          );
           json(res, { error: 'Internal mock server error' }, 500);
         }
       });

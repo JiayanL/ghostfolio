@@ -1,0 +1,128 @@
+<div class="container py-3">
+  <div class="row">
+    <div class="col">
+      <h1 class="d-none d-sm-block h3 mb-3 text-center" i18n>Positions</h1>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <ngx-skeleton-loader animation="pulse" count="5" />
+  } @else {
+    <div class="row mb-4">
+      <div class="col-md-6 mb-3 mb-md-0">
+        <div class="summary-card">
+          <div class="summary-label" i18n>Total Market Value</div>
+          <gf-value
+            size="large"
+            [isCurrency]="true"
+            [locale]="user?.settings?.locale"
+            [value]="totalMarketValue"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="summary-card">
+          <div class="summary-label" i18n>Total Unrealized P&amp;L</div>
+          <div class="d-flex align-items-center">
+            <gf-trend-indicator size="medium" [value]="totalUnrealizedPnL" />
+            <gf-value
+              class="ml-2"
+              size="large"
+              [colorizeSign]="true"
+              [isCurrency]="true"
+              [locale]="user?.settings?.locale"
+              [value]="totalUnrealizedPnL"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="gf-table w-100" mat-table [dataSource]="positions">
+        <ng-container matColumnDef="symbol">
+          <th *matHeaderCellDef i18n mat-header-cell>Symbol</th>
+          <td *matCellDef="let position" mat-cell>
+            <div class="font-weight-bold">{{ position.symbol }}</div>
+            <div class="small text-muted">{{ position.name }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th *matHeaderCellDef i18n mat-header-cell>Qty</th>
+          <td *matCellDef="let position" mat-cell>
+            {{ position.quantity }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="avgCost">
+          <th *matHeaderCellDef i18n mat-header-cell>Avg Cost</th>
+          <td *matCellDef="let position" mat-cell>
+            <gf-value
+              [isCurrency]="true"
+              [locale]="user?.settings?.locale"
+              [value]="position.avgCost"
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="currentPrice">
+          <th *matHeaderCellDef i18n mat-header-cell>Last</th>
+          <td *matCellDef="let position" mat-cell>
+            <gf-value
+              [isCurrency]="true"
+              [locale]="user?.settings?.locale"
+              [value]="position.currentPrice"
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="marketValue">
+          <th *matHeaderCellDef i18n mat-header-cell>Market Value</th>
+          <td *matCellDef="let position" mat-cell>
+            <gf-value
+              [isCurrency]="true"
+              [locale]="user?.settings?.locale"
+              [value]="position.marketValue"
+            />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="unrealizedPnL">
+          <th *matHeaderCellDef i18n mat-header-cell>Unrealized P&amp;L</th>
+          <td *matCellDef="let position" mat-cell>
+            <div class="d-flex align-items-center">
+              <gf-trend-indicator
+                size="small"
+                [value]="position.unrealizedPnLPercent"
+              />
+              <gf-value
+                class="ml-1"
+                [colorizeSign]="true"
+                [isCurrency]="true"
+                [locale]="user?.settings?.locale"
+                [value]="position.unrealizedPnL"
+              />
+              <gf-value
+                class="ml-1 text-muted"
+                [colorizeSign]="true"
+                [isPercent]="true"
+                [locale]="user?.settings?.locale"
+                [value]="position.unrealizedPnLPercent"
+              />
+            </div>
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+      </table>
+
+      @if (positions.length === 0) {
+        <div class="empty-state py-5 text-center text-muted" i18n>
+          No open positions.
+        </div>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,44 @@
+{
+  "positions": [
+    {
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "quantity": 50,
+      "avgCost": 185.2,
+      "currentPrice": 250.12,
+      "marketValue": 12506.0,
+      "unrealizedPnL": 3246.0,
+      "unrealizedPnLPercent": 0.3511
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft Corporation",
+      "quantity": 25,
+      "avgCost": 350.0,
+      "currentPrice": 420.55,
+      "marketValue": 10513.75,
+      "unrealizedPnL": 1763.75,
+      "unrealizedPnLPercent": 0.2016
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA Corporation",
+      "quantity": 10,
+      "avgCost": 650.0,
+      "currentPrice": 875.4,
+      "marketValue": 8754.0,
+      "unrealizedPnL": 2254.0,
+      "unrealizedPnLPercent": 0.3468
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla Inc.",
+      "quantity": 20,
+      "avgCost": 280.0,
+      "currentPrice": 245.8,
+      "marketValue": 4916.0,
+      "unrealizedPnL": -684.0,
+      "unrealizedPnLPercent": -0.1221
+    }
+  ]
+}

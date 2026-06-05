@@ -52,6 +52,10 @@ import {
   PortfolioReportResponse,
   PublicPortfolioResponse,
   SymbolItem,
+  TradeOrdersResponse,
+  TradeOrder,
+  TradePositionsResponse,
+  TradeQuotesResponse,
   User,
   UserItem,
   WatchlistResponse
@@ -746,6 +750,18 @@ export class DataService {
     return this.http.get<Tag[]>('/api/v1/tags');
   }
 
+  public fetchTradeOrders() {
+    return this.http.get<TradeOrdersResponse>('/api/v1/trade/orders');
+  }
+
+  public fetchTradePositions() {
+    return this.http.get<TradePositionsResponse>('/api/v1/trade/positions');
+  }
+
+  public fetchTradeQuotes() {
+    return this.http.get<TradeQuotesResponse>('/api/v1/trade/quotes');
+  }
+
   public fetchWatchlist() {
     return this.http.get<WatchlistResponse>('/api/v1/watchlist');
   }
@@ -807,6 +823,16 @@ export class DataService {
 
   public postWatchlistItem(watchlistItem: CreateWatchlistItemDto) {
     return this.http.post('/api/v1/watchlist', watchlistItem);
+  }
+
+  public postTradeOrder(
+    order: Omit<TradeOrder, 'createdAt' | 'id' | 'status'>
+  ) {
+    return this.http.post<TradeOrder>('/api/v1/trade/orders', order);
+  }
+
+  public deleteTradeOrder(orderId: string) {
+    return this.http.delete(`/api/v1/trade/orders/${orderId}`);
   }
 
   public putAccess(aAccess: UpdateAccessDto) {

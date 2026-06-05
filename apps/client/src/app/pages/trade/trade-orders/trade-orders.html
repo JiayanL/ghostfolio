@@ -1,0 +1,112 @@
+<div class="container py-3">
+  <div class="row">
+    <div class="col">
+      <h1 class="d-none d-sm-block h3 mb-3 text-center" i18n>Orders</h1>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <ngx-skeleton-loader animation="pulse" count="5" />
+  } @else {
+    <div class="table-container">
+      <table class="gf-table w-100" mat-table [dataSource]="orders">
+        <ng-container matColumnDef="createdAt">
+          <th *matHeaderCellDef i18n mat-header-cell>Date</th>
+          <td *matCellDef="let order" mat-cell>
+            {{
+              order.createdAt
+                | date: 'medium' : undefined : user?.settings?.locale
+            }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="symbol">
+          <th *matHeaderCellDef i18n mat-header-cell>Symbol</th>
+          <td *matCellDef="let order" mat-cell>
+            <div class="font-weight-bold">{{ order.symbol }}</div>
+            <div class="small text-muted">{{ order.name }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="side">
+          <th *matHeaderCellDef i18n mat-header-cell>Side</th>
+          <td *matCellDef="let order" mat-cell>
+            <span
+              class="side-badge"
+              [class.side-buy]="order.side === 'BUY'"
+              [class.side-sell]="order.side === 'SELL'"
+            >
+              {{ order.side }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th *matHeaderCellDef i18n mat-header-cell>Type</th>
+          <td *matCellDef="let order" mat-cell>{{ order.type }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th *matHeaderCellDef i18n mat-header-cell>Qty</th>
+          <td *matCellDef="let order" mat-cell>{{ order.quantity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th *matHeaderCellDef i18n mat-header-cell>Price</th>
+          <td *matCellDef="let order" mat-cell>
+            @if (order.filledPrice) {
+              <gf-value
+                [isCurrency]="true"
+                [locale]="user?.settings?.locale"
+                [value]="order.filledPrice"
+              />
+            } @else if (order.limitPrice) {
+              <gf-value
+                [isCurrency]="true"
+                [locale]="user?.settings?.locale"
+                [value]="order.limitPrice"
+              />
+            } @else {
+              <span class="text-muted">—</span>
+            }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th *matHeaderCellDef i18n mat-header-cell>Status</th>
+          <td *matCellDef="let order" mat-cell>
+            <span class="status-badge" [ngClass]="getStatusClass(order.status)">
+              {{ order.status }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th *matHeaderCellDef mat-header-cell></th>
+          <td *matCellDef="let order" mat-cell>
+            @if (order.status === 'PENDING') {
+              <button
+                color="warn"
+                i18n
+                mat-stroked-button
+                type="button"
+                (click)="onCancelOrder(order)"
+              >
+                Cancel
+              </button>
+            }
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+      </table>
+
+      @if (orders.length === 0) {
+        <div class="empty-state py-5 text-center text-muted" i18n>
+          No orders yet. Place your first trade from the Trade tab.
+        </div>
+      }
+    </div>
+  }
+</div>

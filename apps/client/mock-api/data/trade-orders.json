@@ -1,0 +1,50 @@
+{
+  "orders": [
+    {
+      "id": "ord-001",
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "side": "BUY",
+      "type": "LIMIT",
+      "quantity": 10,
+      "limitPrice": 248.0,
+      "status": "PENDING",
+      "createdAt": "2026-06-05T09:30:00.000Z"
+    },
+    {
+      "id": "ord-002",
+      "symbol": "MSFT",
+      "name": "Microsoft Corporation",
+      "side": "SELL",
+      "type": "MARKET",
+      "quantity": 5,
+      "filledPrice": 420.55,
+      "status": "FILLED",
+      "createdAt": "2026-06-04T14:22:00.000Z",
+      "filledAt": "2026-06-04T14:22:01.000Z"
+    },
+    {
+      "id": "ord-003",
+      "symbol": "NVDA",
+      "name": "NVIDIA Corporation",
+      "side": "BUY",
+      "type": "MARKET",
+      "quantity": 2,
+      "filledPrice": 872.3,
+      "status": "FILLED",
+      "createdAt": "2026-06-03T10:15:00.000Z",
+      "filledAt": "2026-06-03T10:15:00.000Z"
+    },
+    {
+      "id": "ord-004",
+      "symbol": "GOOGL",
+      "name": "Alphabet Inc.",
+      "side": "BUY",
+      "type": "LIMIT",
+      "quantity": 15,
+      "limitPrice": 170.0,
+      "status": "CANCELLED",
+      "createdAt": "2026-06-02T11:00:00.000Z"
+    }
+  ]
+}
